@@ -29,6 +29,9 @@ public class showGraph extends ActionBarActivity {
                     .commit();
         }
 
+        slapGraphOn();
+
+
     }
 
 
@@ -59,33 +62,37 @@ public class showGraph extends ActionBarActivity {
 
         public PlaceholderFragment() {
 
-            //Not sure where this should go - this isn't right but I'm leaving it here until I
-            // figure out fragments.
-            GraphViewSeries avSeries = new GraphViewSeries(new GraphView.GraphViewData[] {
-                new GraphView.GraphViewData(1, 223)
-                    , new GraphView.GraphViewData(2, 221)
-                    , new GraphView.GraphViewData(3, 220)
-                    , new GraphView.GraphViewData(4, 221)
-            });
-
-            GraphView monthAverage = new LineGraphView(this, "Jan Data");
-            monthAverage.addSeries(avSeries);
-
-            LinearLayout layout = (LinearLayout) findViewByID(R.id.graphM);
-            layout.addView(monthAverage);
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_show_graph, container, false);
-            return rootView;
 
+
+            //I cannot believe I finally figured this out.
+            GraphViewSeries avSeries = new GraphViewSeries(new GraphView.GraphViewData[] {
+                    new GraphView.GraphViewData(1, 223)
+                    , new GraphView.GraphViewData(2, 221)
+                    , new GraphView.GraphViewData(3, 220)
+                    , new GraphView.GraphViewData(4, 221)
+            });
+
+            GraphView monthAverage = new LineGraphView(this.getActivity(), "Jan Data");
+            monthAverage.addSeries(avSeries);
+
+            LinearLayout layout = (LinearLayout)  rootView.findViewById(R.id.graphM);
+            layout.addView(monthAverage);
+            //this is the end of my part
+
+            return rootView;
 
         }
 
     }
 
+    public void slapGraphOn(){
 
+    }
 
 }
