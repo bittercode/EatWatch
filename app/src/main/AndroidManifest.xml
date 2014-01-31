@@ -20,6 +20,10 @@
             android:name="org.pyrrhic.eatwatch.showGraph"
             android:label="@string/title_activity_show_graph" >
         </activity>
+        <activity
+            android:name="org.pyrrhic.eatwatch.Stats"
+            android:label="@string/title_activity_stats" >
+        </activity>
     </application>
 
 </manifest>
