@@ -1,6 +1,5 @@
 package org.pyrrhic.eatwatch;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -17,18 +16,19 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
-public class MainActivity extends ActionBarActivity {
+public class showGraph extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_show_graph);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
     }
 
 
@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.show_graph, menu);
         return true;
     }
 
@@ -58,19 +58,34 @@ public class MainActivity extends ActionBarActivity {
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
+
+            //Not sure where this should go - this isn't right but I'm leaving it here until I
+            // figure out fragments.
+            GraphViewSeries avSeries = new GraphViewSeries(new GraphView.GraphViewData[] {
+                new GraphView.GraphViewData(1, 223)
+                    , new GraphView.GraphViewData(2, 221)
+                    , new GraphView.GraphViewData(3, 220)
+                    , new GraphView.GraphViewData(4, 221)
+            });
+
+            GraphView monthAverage = new LineGraphView(this, "Jan Data");
+            monthAverage.addSeries(avSeries);
+
+            LinearLayout layout = (LinearLayout) findViewByID(R.id.graphM);
+            layout.addView(monthAverage);
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_show_graph, container, false);
             return rootView;
+
+
         }
+
     }
 
-    public void buildGraph(View v){
-        Intent intent = new Intent(this,showGraph.class);
-        startActivity(intent);
-    }
+
 
 }
