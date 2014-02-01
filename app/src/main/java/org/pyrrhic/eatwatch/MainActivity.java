@@ -17,7 +17,11 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
+import java.io.FileInputStream;
+
 public class MainActivity extends ActionBarActivity {
+
+    private String file = "EatWatchData";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,7 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
             return rootView;
         }
     }
@@ -76,6 +81,21 @@ public class MainActivity extends ActionBarActivity {
     public void buildStats(View v){
         Intent intent = new Intent(this,Stats.class);
         startActivity(intent);
+    }
+
+    public void readData(View v){
+        try{
+            FileInputStream fin = openFileInput(file);
+            int c;
+            String temp="";
+            while( (c = fin.read()) != -1){
+                temp = temp + Character.toString((char)c);
+            }
+
+
+        }catch(Exception e){
+
+        }
     }
 
 }
