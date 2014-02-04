@@ -1,5 +1,6 @@
 package org.pyrrhic.eatwatch;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -11,20 +12,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
 
-    private String file = "EatWatchData";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //this.setUpFile();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -33,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
     }
 
 
@@ -70,7 +80,9 @@ public class MainActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
             return rootView;
+
         }
+
     }
 
     public void buildGraph(View v){
@@ -81,21 +93,6 @@ public class MainActivity extends ActionBarActivity {
     public void buildStats(View v){
         Intent intent = new Intent(this,Stats.class);
         startActivity(intent);
-    }
-
-    public void readData(View v){
-        try{
-            FileInputStream fin = openFileInput(file);
-            int c;
-            String temp="";
-            while( (c = fin.read()) != -1){
-                temp = temp + Character.toString((char)c);
-            }
-
-
-        }catch(Exception e){
-
-        }
     }
 
 }
