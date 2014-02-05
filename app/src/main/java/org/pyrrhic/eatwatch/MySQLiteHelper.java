@@ -28,6 +28,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + " text not null, " + COLUMN_AVERAGE
             + " text );";
 
+
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

@@ -1,6 +1,5 @@
 package org.pyrrhic.eatwatch;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -13,12 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GraphViewSeries;
-import com.jjoe64.graphview.LineGraphView;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -28,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -79,6 +74,15 @@ public class MainActivity extends ActionBarActivity {
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
+            WeightsDataSource datasource = new WeightsDataSource(getActivity());
+            datasource.open();
+
+            List<WeightInfo> values = datasource.getAllWeights();
+            ArrayAdapter<WeightInfo> adapter;
+            adapter = new ArrayAdapter<WeightInfo>(getActivity(),android.R.layout.simple_expandable_list_item_1,values);
+            ListView listview1 = (ListView) rootView.findViewById(R.id.lstData);
+            listview1.setAdapter(adapter);
+
             return rootView;
 
         }
@@ -91,8 +95,21 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void buildStats(View v){
-        Intent intent = new Intent(this,Stats.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this,Stats.class);
+        //startActivity(intent);
+        WeightsDataSource db = new WeightsDataSource(this);
+        db.open();
+
+        WeightInfo weight = null;
+
+        ListView lv = (ListView) findViewById(R.id.lstData);
+        ArrayAdapter<WeightInfo> adapter = (ArrayAdapter<WeightInfo>) lv.getAdapter();
+        //WeightsDataSource db = new WeightsDataSource(this);
+        weight = db.createWeight("5Feb2014","221","221");
+        adapter.add(weight);
+        weight = db.createWeight("6Feb2014","220","220");
+        adapter.add(weight);
+        adapter.notifyDataSetChanged();
     }
 
 }
