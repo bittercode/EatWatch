@@ -77,7 +77,9 @@ public class WeightsDataSource {
     private WeightInfo cursorToWeight(Cursor cursor) {
         WeightInfo weight = new WeightInfo();
         weight.setId(cursor.getLong(0));
-        weight.setWeight(cursor.getString(1));
+        weight.setWdate(cursor.getString(1));
+        weight.setWeight(cursor.getString(2));
+        weight.setAverage(cursor.getString(3));
         return weight;
     }
 

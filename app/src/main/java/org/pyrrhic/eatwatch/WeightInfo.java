@@ -40,4 +40,12 @@ public class WeightInfo {
     public void setAverage(String average) {
         this.average = average;
     }
+
+    // Will be used by the ArrayAdapter in the ListView
+    @Override
+    public String toString() {
+        String all;
+        all = wdate + " " + weight + " " + average;
+        return all;
+    }
 }
