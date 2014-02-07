@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.io.BufferedReader;
@@ -82,6 +83,12 @@ public class MainActivity extends ActionBarActivity {
             adapter = new ArrayAdapter<WeightInfo>(getActivity(),android.R.layout.simple_expandable_list_item_1,values);
             ListView listview1 = (ListView) rootView.findViewById(R.id.lstData);
             listview1.setAdapter(adapter);
+            datasource.close();
+
+            EditText editDate = (EditText) rootView.findViewById(R.id.edtDate);
+            editDate.setText("21 Feb 2014");
+            EditText editWeight = (EditText) rootView.findViewById(R.id.edtWeight);
+            editWeight.setText("220");
 
             return rootView;
 
@@ -95,8 +102,21 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void buildStats(View v){
-        //Intent intent = new Intent(this,Stats.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this,Stats.class);
+        startActivity(intent);
+    }
+
+    public void addRecord(View v){
+        String mweight;
+        String wDate;
+        String mAve;
+
+        EditText editText = (EditText) findViewById(R.id.edtWeight);
+        mweight = editText.getText().toString();
+        editText = (EditText) findViewById(R.id.edtDate);
+        wDate = editText.getText().toString();
+        mAve = "223";
+
         WeightsDataSource db = new WeightsDataSource(this);
         db.open();
 
@@ -104,12 +124,11 @@ public class MainActivity extends ActionBarActivity {
 
         ListView lv = (ListView) findViewById(R.id.lstData);
         ArrayAdapter<WeightInfo> adapter = (ArrayAdapter<WeightInfo>) lv.getAdapter();
-        //WeightsDataSource db = new WeightsDataSource(this);
-        weight = db.createWeight("5Feb2014","221","221");
-        adapter.add(weight);
-        weight = db.createWeight("6Feb2014","220","220");
+        weight = db.createWeight(wDate,mweight,mAve);
         adapter.add(weight);
         adapter.notifyDataSetChanged();
+        db.close();
+
     }
 
 }

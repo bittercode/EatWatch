@@ -23,20 +23,17 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
+            android:inputType="date"
+            android:id="@+id/edtDate"
             android:layout_weight="5" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText2"
-            android:layout_weight="5" />
+            android:id="@+id/edtWeight"
+            android:layout_weight="5"
+            android:inputType="number" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText3"
-            android:layout_weight="5" />
     </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
@@ -62,6 +59,15 @@
                 android:id="@+id/btnStats"
                 android:onClick="buildStats"
                 android:layout_gravity="bottom" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:id="@+id/btnAdd"
+                android:layout_weight="5"
+                android:layout_gravity="bottom"
+                android:onClick="addRecord"/>
         </LinearLayout>
 
 
