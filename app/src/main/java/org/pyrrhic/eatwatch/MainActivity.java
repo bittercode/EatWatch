@@ -22,7 +22,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
@@ -86,7 +89,11 @@ public class MainActivity extends ActionBarActivity {
             datasource.close();
 
             EditText editDate = (EditText) rootView.findViewById(R.id.edtDate);
-            editDate.setText("21 Feb 2014");
+            DateFormat  dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            String today = dateFormat.format(date);
+
+            editDate.setText(today);
             EditText editWeight = (EditText) rootView.findViewById(R.id.edtWeight);
             editWeight.setText("220");
 

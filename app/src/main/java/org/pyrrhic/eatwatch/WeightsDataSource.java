@@ -61,7 +61,7 @@ public class WeightsDataSource {
         List<WeightInfo> weights = new ArrayList<WeightInfo>();
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_WEIGHTS,
-                allColumns, null, null, null, null, null);
+                allColumns, null, null, null, null, "wDate Desc");
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
